@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SGA ENSAE — Documentation Technique</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<style>
+:root{--bg:#f4f7ff;--bg2:#e8effc;--bg3:#dce7f9;--sf:#ffffff;--sf2:#f0f5ff;--bd:rgba(37,99,235,0.12);--bd2:rgba(37,99,235,0.28);--bl:#1d4ed8;--bld:#1e40af;--blg:rgba(29,78,216,0.15);--bls:rgba(29,78,216,0.07);--cy:#0891b2;--or:#b45309;--ors:rgba(180,83,9,0.09);--gr:#047857;--grs:rgba(4,120,87,0.09);--ro:#be123c;--t:#0f1d3d;--t2:#1e3a5f;--t3:#4b6280;--r:14px;--rs:8px;--fh:'Syne',sans-serif;--fb:'DM Sans',sans-serif;--fm:'JetBrains Mono',monospace}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--fb);background:var(--bg);color:var(--t);font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg2)}::-webkit-scrollbar-thumb{background:rgba(29,78,216,.3);border-radius:99px}
+h1,h2,h3,h4{font-family:var(--fh);line-height:1.15}
+a{color:var(--bl);text-decoration:none}
+p{color:var(--t2);margin-bottom:1em}p:last-child{margin-bottom:0}
+strong{color:var(--t);font-weight:600}
+code{font-family:var(--fm);background:#dbeafe;color:#1e40af;padding:2px 7px;border-radius:5px;font-size:.82em;border:1px solid rgba(29,78,216,.18)}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:200;background:rgba(255,255,255,.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--bd);box-shadow:0 1px 20px rgba(29,78,216,.08)}
+.nav-i{max-width:1160px;margin:0 auto;padding:0 32px;height:58px;display:flex;align-items:center;gap:0}
+.nav-logo{font-family:var(--fh);font-weight:800;font-size:.95rem;color:var(--t);margin-right:36px;display:flex;align-items:center;gap:8px;white-space:nowrap}
+.ndot{width:8px;height:8px;background:var(--bl);border-radius:50%;box-shadow:0 0 8px rgba(29,78,216,.5);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 6px rgba(29,78,216,.4)}50%{box-shadow:0 0 16px rgba(29,78,216,.7),0 0 30px rgba(29,78,216,.25)}}
+.nav-links{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;flex:1}
+.nav-links::-webkit-scrollbar{display:none}
+.nav-links a{display:flex;align-items:center;gap:5px;padding:6px 13px;border-radius:7px;color:var(--t3);font-size:12.5px;font-weight:500;white-space:nowrap;transition:all .2s;border-bottom:2px solid transparent}
+.nav-links a .ms{font-size:15px}
+.nav-links a:hover{color:var(--bl);background:var(--bls)}
+.nav-links a.on{color:var(--bl);background:var(--bls);border-bottom-color:var(--bl)}
+.nav-tag{margin-left:auto;padding:4px 14px;background:var(--bl);border-radius:99px;font-size:11.5px;font-weight:600;color:#fff;white-space:nowrap;box-shadow:0 2px 8px rgba(29,78,216,.3)}
+
+/* WRAP */
+.w{max-width:1160px;margin:0 auto;padding:0 32px}
+
+/* HERO */
+.hero{position:relative;padding:96px 0 80px;overflow:hidden;background:linear-gradient(160deg,#f0f5ff 0%,#e8f0fe 40%,#f4f7ff 100%)}
+.hbg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 55% at 65% -5%,rgba(29,78,216,.13) 0%,transparent 70%),radial-gradient(ellipse 40% 35% at 95% 85%,rgba(8,145,178,.07) 0%,transparent 60%)}
+.hgrid{position:absolute;inset:0;background-image:linear-gradient(rgba(29,78,216,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(29,78,216,.06) 1px,transparent 1px);background-size:48px 48px;mask-image:radial-gradient(ellipse 90% 80% at 50% 0%,black 20%,transparent 80%)}
+.hi{position:relative;z-index:2}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:5px 16px 5px 8px;background:white;border:1px solid rgba(29,78,216,.25);border-radius:99px;font-size:11.5px;font-weight:600;color:var(--bl);margin-bottom:26px;box-shadow:0 2px 12px rgba(29,78,216,.1)}
+.eyebrow .ms{font-size:14px}
+h1{font-size:clamp(2.6rem,6vw,4.6rem);font-weight:800;letter-spacing:-1.5px;line-height:1.05;margin-bottom:22px;color:var(--t)}
+h1 .acc{background:linear-gradient(135deg,#1d4ed8,#0891b2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hdesc{font-size:1.05rem;font-weight:300;color:var(--t2);max-width:580px;margin-bottom:40px;line-height:1.85}
+.pills{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:44px}
+.pill{display:inline-flex;align-items:center;gap:5px;padding:6px 13px;border-radius:99px;font-size:12px;font-weight:500;border:1px solid var(--bd);background:white;color:var(--t2);transition:all .2s;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.pill .ms{font-size:14px}
+.pill:hover{border-color:var(--bl);color:var(--bl);box-shadow:0 2px 10px rgba(29,78,216,.15)}
+.pb{background:#eff6ff;border-color:rgba(29,78,216,.25);color:#1d4ed8}
+.po{background:#fef3c7;border-color:rgba(180,83,9,.25);color:#b45309}
+.pg{background:#ecfdf5;border-color:rgba(4,120,87,.25);color:#047857}
+.hstats{display:flex;gap:36px;flex-wrap:wrap;padding-top:36px;border-top:1px solid rgba(29,78,216,.15)}
+.sn{font-family:var(--fh);font-size:1.9rem;font-weight:800;color:var(--t);line-height:1;margin-bottom:3px}
+.sn span{color:var(--bl)}
+.sl{font-size:11px;color:var(--t3);font-weight:500;letter-spacing:.5px;text-transform:uppercase}
+
+/* SECTIONS */
+section{padding:76px 0;position:relative;background:#fff}
+section:nth-child(even){background:var(--bg2)}
+section+section{border-top:1px solid var(--bd)}
+.stag{display:inline-flex;align-items:center;gap:8px;font-size:10.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--bl);margin-bottom:12px}
+.stag::before{content:'';display:block;width:18px;height:2px;background:var(--bl);border-radius:99px}
+.sh{font-size:clamp(1.7rem,3.5vw,2.5rem);font-weight:800;letter-spacing:-.8px;color:var(--t);margin-bottom:10px}
+.ss{font-size:.98rem;color:var(--t2);max-width:620px;margin-bottom:44px;font-weight:300}
+h3.sub{font-family:var(--fh);font-size:.95rem;font-weight:700;color:var(--t);margin:40px 0 14px;display:flex;align-items:center;gap:10px}
+h3.sub .ms{font-size:17px;color:var(--bl)}
+h3.sub::after{content:'';flex:1;height:1px;background:var(--bd)}
+
+/* CARDS */
+.g{display:grid;gap:14px}
+.g2{grid-template-columns:repeat(auto-fill,minmax(290px,1fr))}
+.g3{grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
+.g4{grid-template-columns:repeat(auto-fill,minmax(185px,1fr))}
+.card{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);padding:22px;transition:border-color .2s,box-shadow .2s,transform .25s;position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--bl),#60a5fa);opacity:0;transition:opacity .3s;border-radius:var(--r) var(--r) 0 0}
+.card:hover{border-color:rgba(29,78,216,.3);box-shadow:0 8px 36px rgba(29,78,216,.12),0 2px 8px rgba(29,78,216,.06);transform:translateY(-3px)}
+.card:hover::before{opacity:1}
+.ci{width:42px;height:42px;border-radius:10px;background:#eff6ff;border:1px solid rgba(29,78,216,.2);display:flex;align-items:center;justify-content:center;margin-bottom:14px;color:#1d4ed8}
+.ci .ms{font-size:20px}
+.ci.or{background:#fef3c7;border-color:rgba(180,83,9,.2);color:#b45309}
+.ci.gr{background:#ecfdf5;border-color:rgba(4,120,87,.2);color:#047857}
+.ci.ro{background:#fff1f2;border-color:rgba(190,18,60,.2);color:#be123c}
+.ci.cy{background:#e0f2fe;border-color:rgba(8,145,178,.2);color:#0891b2}
+.card h4{font-family:var(--fh);font-size:.88rem;font-weight:700;color:var(--t);margin-bottom:7px}
+.card p{font-size:.86rem;line-height:1.6}
+
+/* TABLE */
+.tw{border-radius:var(--r);border:1px solid var(--bd);overflow:hidden;margin:18px 0;box-shadow:0 2px 12px rgba(29,78,216,.05)}
+table{width:100%;border-collapse:collapse;font-size:.87rem}
+thead{background:#eff6ff}
+thead th{padding:12px 16px;text-align:left;font-family:var(--fh);font-size:.72rem;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--bl);white-space:nowrap;border-bottom:2px solid rgba(29,78,216,.15)}
+tbody tr{border-bottom:1px solid var(--bd);transition:background .15s}
+tbody tr:last-child{border-bottom:none}
+tbody tr:hover{background:#eff6ff}
+tbody td{padding:12px 16px;color:var(--t2);vertical-align:top}
+tbody td:first-child{color:var(--t);font-weight:500}
+
+/* CODE */
+.cb{position:relative;background:#1e293b;border:1px solid #334155;border-radius:var(--r);overflow:hidden;margin:18px 0;box-shadow:0 4px 20px rgba(15,29,61,.15)}
+.ch{display:flex;align-items:center;gap:6px;padding:9px 15px;background:rgba(255,255,255,.05);border-bottom:1px solid rgba(255,255,255,.08)}
+.cd{width:10px;height:10px;border-radius:50%}
+.ct{margin-left:6px;font-family:var(--fm);font-size:11.5px;color:#64748b}
+pre{padding:18px 22px;font-family:var(--fm);font-size:.81rem;color:#94a3b8;overflow-x:auto;line-height:1.75}
+pre .c{color:#475569;font-style:italic}
+pre .kw{color:#7dd3fc}
+pre .str{color:#86efac}
+pre .fn{color:#c4b5fd}
+
+/* DB SCHEMA */
+.dbg{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:11px;margin:22px 0}
+.dbc{background:var(--sf);border:1px solid var(--bd);border-radius:var(--rs);overflow:hidden;transition:border-color .2s,transform .2s}
+.dbc:hover{border-color:rgba(37,99,235,.4);transform:translateY(-2px)}
+.dbh{padding:8px 11px;background:var(--bg2);font-family:var(--fh);font-size:.76rem;font-weight:700;color:var(--t);display:flex;align-items:center;gap:6px;border-bottom:1px solid var(--bd)}
+.dbh .ms{font-size:14px;color:var(--bl)}
+.dbfs{padding:7px 11px;display:flex;flex-direction:column;gap:3px}
+.dbf{font-family:var(--fm);font-size:.7rem;color:var(--t3);display:flex;align-items:center;gap:4px}
+.pk{color:var(--gr);font-weight:700;font-size:8.5px;background:var(--grs);padding:1px 4px;border-radius:3px}
+.fk{color:var(--or);font-weight:700;font-size:8.5px;background:var(--ors);padding:1px 4px;border-radius:3px}
+
+/* FLOW */
+.flow{display:flex;align-items:center;gap:0;flex-wrap:wrap;margin:28px 0;background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);padding:26px 22px}
+.fs{flex:1;min-width:110px;text-align:center;position:relative;padding:0 6px}
+.fs:not(:last-child)::after{content:'arrow_forward';font-family:'Material Symbols Rounded';position:absolute;right:-14px;top:50%;transform:translateY(-50%);font-size:17px;color:var(--t3)}
+.fi{width:44px;height:44px;border-radius:11px;background:#eff6ff;border:1px solid rgba(29,78,216,.25);display:flex;align-items:center;justify-content:center;margin:0 auto 9px;box-shadow:0 2px 8px rgba(29,78,216,.12)}
+.fi .ms{font-size:20px;color:#1d4ed8}
+.fl{font-size:.8rem;font-weight:600;color:var(--t);line-height:1.3}
+.fsub{font-size:.7rem;color:var(--t3);margin-top:3px}
+
+/* ROLES */
+.rg{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin:22px 0}
+.rc{border-radius:var(--r);overflow:hidden;border:1px solid var(--bd);background:#fff;transition:transform .2s,border-color .2s,box-shadow .2s}
+.rc:hover{transform:translateY(-3px);border-color:rgba(29,78,216,.3);box-shadow:0 6px 28px rgba(29,78,216,.10)}
+.rt{padding:14px;display:flex;align-items:center;gap:9px;border-bottom:1px solid var(--bd)}
+.ra{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center}
+.rn{font-family:var(--fh);font-size:.85rem;font-weight:700;color:var(--t)}
+.rb{font-size:10px;color:var(--t3);font-weight:500;margin-top:1px}
+.rbody{padding:0 14px 14px;background:#fafcff}
+.ri{display:flex;align-items:center;gap:7px;padding:5px 0;font-size:.81rem;color:var(--t2);border-bottom:1px solid var(--bd)}
+.ri:last-child{border-bottom:none}
+.ri .ms{font-size:14px;color:var(--t3)}
+.ri.ok .ms{color:var(--gr)}
+.ri.no .ms{color:var(--ro)}
+.ri.no{color:var(--t3)}
+
+/* TESTS */
+.tl{display:flex;flex-direction:column;gap:11px;margin:22px 0}
+.tc{background:#fff;border:1px solid var(--bd);border-radius:var(--r);overflow:hidden;transition:border-color .2s,box-shadow .2s}
+.tc:hover{border-color:rgba(29,78,216,.3);box-shadow:0 4px 20px rgba(29,78,216,.08)}
+.thead{display:flex;align-items:center;gap:13px;padding:15px 19px;background:#fff}
+.tn{width:27px;height:27px;border-radius:7px;background:var(--bl);display:flex;align-items:center;justify-content:center;font-family:var(--fh);font-size:11.5px;font-weight:800;color:#fff;flex-shrink:0}
+.ttitle{font-family:var(--fh);font-weight:700;color:var(--t);font-size:.9rem;flex:1}
+.tbody2{padding:0 19px 16px;border-top:1px solid var(--bd);background:#f8fbff}
+.tbody2 ul{padding:12px 0 0;list-style:none;display:flex;flex-direction:column;gap:6px}
+.tbody2 li{display:flex;align-items:flex-start;gap:9px;font-size:.87rem;color:var(--t2)}
+.tbody2 li::before{content:'arrow_right';font-family:'Material Symbols Rounded';font-size:16px;color:var(--t3);flex-shrink:0;line-height:1.55}
+.chk::before{content:'check_circle' !important;color:var(--gr) !important}
+
+/* CALLOUTS */
+.call{display:flex;gap:13px;padding:15px 19px;border-radius:var(--rs);margin:18px 0;font-size:.88rem}
+.call .ms{font-size:19px;flex-shrink:0;margin-top:2px}
+.ci2{background:#eff6ff;border:1px solid rgba(29,78,216,.2);color:#1e3a5f}
+.ci2 .ms{color:#1d4ed8}
+.cw{background:#fffbeb;border:1px solid rgba(180,83,9,.25);color:#78350f}
+.cw .ms{color:#b45309}
+.cok{background:#ecfdf5;border:1px solid rgba(4,120,87,.25);color:#064e3b}
+.cok .ms{color:#047857}
+
+/* TAGS */
+.tag{display:inline-flex;align-items:center;padding:2px 9px;border-radius:99px;font-size:10.5px;font-weight:600}
+.tb{background:#eff6ff;color:#1d4ed8;border:1px solid rgba(29,78,216,.2)}
+.to{background:#fef3c7;color:#92400e;border:1px solid rgba(180,83,9,.2)}
+.tg{background:#ecfdf5;color:#047857;border:1px solid rgba(4,120,87,.2)}
+.tr{background:#fff1f2;color:#be123c;border:1px solid rgba(190,18,60,.2)}
+
+/* ANIM */
+@keyframes fu{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+.fade{opacity:0;animation:fu .6s ease forwards}
+.d1{animation-delay:.05s}.d2{animation-delay:.12s}.d3{animation-delay:.19s}
+.d4{animation-delay:.26s}.d5{animation-delay:.33s}.d6{animation-delay:.40s}
+
+/* FOOTER */
+footer{padding:44px 32px;border-top:2px solid var(--bl);background:linear-gradient(135deg,#0f172a 0%,#1e3a5f 100%)}
+.fi2{max-width:1160px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px}
+.flogo{font-family:var(--fh);font-weight:800;font-size:.92rem;color:#fff}
+.fmeta{font-size:12.5px;color:#64748b}
+
+@media(max-width:768px){.w{padding:0 18px}.rg{grid-template-columns:1fr 1fr}.flow{flex-direction:column;align-items:flex-start}.fs::after{display:none!important}.nav-tag{display:none}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-i">
+    <div class="nav-logo"><div class="ndot"></div>SGA ENSAE</div>
+    <div class="nav-links">
+      <a href="#objectif"><span class="ms material-symbols-rounded">flag</span>Objectif</a>
+      <a href="#archi"><span class="ms material-symbols-rounded">account_tree</span>Architecture</a>
+      <a href="#bdd"><span class="ms material-symbols-rounded">database</span>Base de données</a>
+      <a href="#modules"><span class="ms material-symbols-rounded">grid_view</span>Modules</a>
+      <a href="#roles"><span class="ms material-symbols-rounded">manage_accounts</span>Rôles</a>
+      <a href="#pipeline"><span class="ms material-symbols-rounded">conversion_path</span>Pipeline</a>
+      <a href="#deploy"><span class="ms material-symbols-rounded">rocket_launch</span>Déploiement</a>
+      <a href="#tests"><span class="ms material-symbols-rounded">checklist</span>Tests</a>
+    </div>
+    <div class="nav-tag">Python 3.11 · Dash · PostgreSQL</div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hbg"></div><div class="hgrid"></div>
+  <div class="w hi">
+    <div class="eyebrow fade d1"><span class="ms material-symbols-rounded">school</span>Documentation Technique — Projet Dataviz 2</div>
+    <h1 class="fade d2">Système de Gestion<br/><span class="acc">Académique ENSAE</span></h1>
+    <p class="hdesc fade d3">Migration d'une gestion Excel vers une application web full-stack multi-rôles avec persistance SQL, bulletins PDF, workflow de validation collaboratif et déploiement cloud continu.</p>
+    <div class="pills fade d4">
+      <span class="pill pb"><span class="ms material-symbols-rounded">code</span>Python 3.11</span>
+      <span class="pill pb"><span class="ms material-symbols-rounded">bolt</span>Dash 2.17</span>
+      <span class="pill pb"><span class="ms material-symbols-rounded">storage</span>SQLAlchemy 2.0</span>
+      <span class="pill po"><span class="ms material-symbols-rounded">database</span>PostgreSQL 15</span>
+      <span class="pill pg"><span class="ms material-symbols-rounded">rocket_launch</span>Render.com</span>
+      <span class="pill"><span class="ms material-symbols-rounded">picture_as_pdf</span>ReportLab</span>
+      <span class="pill"><span class="ms material-symbols-rounded">lock</span>bcrypt</span>
+    </div>
+    <div class="hstats fade d5">
+      <div><div class="sn">16<span>+</span></div><div class="sl">Tables SQL</div></div>
+      <div><div class="sn">10<span>+</span></div><div class="sl">Pages Dash</div></div>
+      <div><div class="sn">4</div><div class="sl">Rôles</div></div>
+      <div><div class="sn">7</div><div class="sl">Feuilles migration</div></div>
+      <div><div class="sn">∞</div><div class="sl">Idempotence</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 01 OBJECTIF -->
+<section id="objectif">
+  <div class="w">
+    <div class="stag">01 — Objectif</div>
+    <h2 class="sh">Pourquoi ce projet ?</h2>
+    <p class="ss">La gestion scolaire de l'ENSAE reposait sur des fichiers Excel partagés, sans contrôle d'accès ni intégrité des données. Ce projet replace tout par une application web robuste.</p>
+    <div class="g g3">
+      <div class="card fade d1"><div class="ci"><span class="ms material-symbols-rounded">warning</span></div><h4>Problème initial</h4><p>Fichiers Excel partagés, risques de corruption, aucun contrôle d'accès, pas d'historique, impossible de gérer plusieurs utilisateurs simultanément.</p></div>
+      <div class="card fade d2"><div class="ci or"><span class="ms material-symbols-rounded">rocket_launch</span></div><h4>Solution déployée</h4><p>Application web Dash centralisée avec base SQL relationnelle, authentification multi-rôles, génération PDF automatique et import Excel intelligent.</p></div>
+      <div class="card fade d3"><div class="ci gr"><span class="ms material-symbols-rounded">verified</span></div><h4>Cahier des charges</h4><p>Tous les modules du projet Dataviz2 sont couverts et enrichis de fonctionnalités bonus : planning collaboratif, statistiques, explorateur BDD.</p></div>
+    </div>
+    <h3 class="sub"><span class="ms material-symbols-rounded">check_circle</span>Modules livrés vs exigés</h3>
+    <div class="tw"><table>
+      <thead><tr><th>Module</th><th>Exigé</th><th>Implémentation</th><th>Statut</th></tr></thead>
+      <tbody>
+        <tr><td>M0 — Persistance & Migration</td><td>SQLAlchemy + import Excel</td><td>recreate_db.py + migration.py 7 feuilles, idempotent</td><td><span class="tag tg">✓ Complet</span></td></tr>
+        <tr><td>M1 — Gestion des Cours</td><td>CRUD + progression horaire</td><td>UE + Modules, barre progression temps réel</td><td><span class="tag tg">✓ Complet</span></td></tr>
+        <tr><td>M2 — Cahier de texte & Présences</td><td>Séances + appel numérique</td><td>Checklist dynamique, historique filtrable</td><td><span class="tag tg">✓ Complet</span></td></tr>
+        <tr><td>M3 — Étudiants & Notes</td><td>Fiches + import notes</td><td>Template Excel → upload → moyennes auto</td><td><span class="tag tg">✓ Complet</span></td></tr>
+        <tr><td>M4 — Bulletins PDF</td><td>Génération individuelle</td><td>Individuel + lot classe, rang, appréciations</td><td><span class="tag tg">✓ Complet</span></td></tr>
+        <tr><td>M5 — Planning collaboratif</td><td>—</td><td>Workflow validation + notifications email auto</td><td><span class="tag to">✓ Bonus</span></td></tr>
+        <tr><td>M6 — Statistiques Plotly</td><td>—</td><td>Notes, assiduité, progression horaire</td><td><span class="tag to">✓ Bonus</span></td></tr>
+        <tr><td>M7 — Administration avancée</td><td>—</td><td>Explorateur BDD, logs migration, gestion rôles</td><td><span class="tag to">✓ Bonus</span></td></tr>
+      </tbody>
+    </table></div>
+    <h3 class="sub"><span class="ms material-symbols-rounded">school</span>Filières ENSAE</h3>
+    <div class="tw"><table>
+      <thead><tr><th>Code</th><th>Libellé complet</th><th>Durée</th><th>Classes</th></tr></thead>
+      <tbody>
+        <tr><td>ISEP</td><td>Ingénieur Statisticien Économiste Préparatoire</td><td>2 ans</td><td>ISEP 1, ISEP 2</td></tr>
+        <tr><td>ISE</td><td>Ingénieur Statisticien Économiste</td><td>3 ans</td><td>ISE 1, ISE 2, ISE 3 (communes incluses)</td></tr>
+        <tr><td>AS</td><td>Analyste Statisticien</td><td>3 ans</td><td>AS 1, AS 2, AS 3</td></tr>
+        <tr><td>MASTERS</td><td>Masters Spécialisés</td><td>1 an</td><td>Diverses spécialités</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- 02 ARCHITECTURE -->
+<section id="archi">
+  <div class="w">
+    <div class="stag">02 — Architecture</div>
+    <h2 class="sh">Stack & Structure</h2>
+    <p class="ss">Architecture MVC légère : Dash gère les vues et callbacks, SQLAlchemy l'accès aux données, les utilitaires assurent les services transverses (PDF, email, migration).</p>
+    <div class="g g3">
+      <div class="card fade d1"><div class="ci"><span class="ms material-symbols-rounded">terminal</span></div><h4>Python 3.11 · Dash 2.17</h4><p>Framework réactif Plotly. Routing multi-pages natif (<code>use_pages=True</code>). Sessions <code>dcc.Store</code>. Composants Bootstrap.</p></div>
+      <div class="card fade d2"><div class="ci or"><span class="ms material-symbols-rounded">database</span></div><h4>SQLAlchemy 2.0 ORM</h4><p>SQLite en dev (zéro config), PostgreSQL 15 en production. Switch via variable <code>DATABASE_URL</code> sans changer une ligne de code.</p></div>
+      <div class="card fade d3"><div class="ci gr"><span class="ms material-symbols-rounded">lock</span></div><h4>bcrypt · Sessions</h4><p>Hachage adaptatif des mots de passe. Sessions vérifiées à chaque chargement de page via <code>require_auth()</code>.</p></div>
+      <div class="card fade d4"><div class="ci ro"><span class="ms material-symbols-rounded">picture_as_pdf</span></div><h4>ReportLab 4.2</h4><p>Bulletins PDF avec charte ENSAE, tableaux, calculs automatiques de moyennes et de rangs par classe.</p></div>
+      <div class="card fade d5"><div class="ci cy"><span class="ms material-symbols-rounded">table_chart</span></div><h4>pandas · openpyxl</h4><p>Import multi-feuilles, export templates pré-remplis, validation des données avant insertion SQL.</p></div>
+      <div class="card fade d6"><div class="ci"><span class="ms material-symbols-rounded">rocket_launch</span></div><h4>Gunicorn · Render.com</h4><p>Serveur WSGI de production. Déploiement continu GitHub → Render. HTTPS automatique Let's Encrypt.</p></div>
+    </div>
+    <h3 class="sub"><span class="ms material-symbols-rounded">folder_open</span>Structure du projet</h3>
+    <div class="cb">
+      <div class="ch"><div class="cd" style="background:#ff5f57"></div><div class="cd" style="background:#febc2e"></div><div class="cd" style="background:#28c840"></div><span class="ct">sga_ensae/ — arborescence complète</span></div>
+      <pre>sga_ensae/
+├── <span class="kw">app.py</span>                 <span class="c"># Entry point : Dash init, navbar callback, server = app.server</span>
+├── <span class="kw">models.py</span>              <span class="c"># 16 modèles SQLAlchemy</span>
+├── <span class="kw">database.py</span>            <span class="c"># engine, SessionLocal, init_db()</span>
+├── <span class="kw">auth.py</span>                <span class="c"># hash_password, verify_password, require_auth</span>
+├── <span class="kw">recreate_db.py</span>         <span class="c"># Seed : filières, classes, périodes, admin</span>
+├── requirements.txt       <span class="c"># gunicorn + dash + sqlalchemy + pandas + reportlab</span>
+├── runtime.txt            <span class="c"># python-3.11.9</span>
+├── .env                   <span class="c"># DATABASE_URL, MAIL_ADDRESS, MAIL_PASSWORD</span>
+│
+├── assets/ navbar.css · img/logo_ensae.png
+├── components/ navbar.py
+│
+├── pages/
+│   ├── <span class="fn">login.py</span>           <span class="c"># /            Auth + session dcc.Store</span>
+│   ├── <span class="fn">dashboard.py</span>       <span class="c"># /dashboard   KPIs par rôle</span>
+│   ├── <span class="fn">cours.py</span>           <span class="c"># /cours       CRUD UE & Modules</span>
+│   ├── <span class="fn">seances.py</span>         <span class="c"># /seances     Cahier de texte + appel</span>
+│   ├── <span class="fn">etudiants.py</span>       <span class="c"># /etudiants   Fiches + notes Excel</span>
+│   ├── <span class="fn">planning.py</span>        <span class="c"># /planning    Calendrier + validation</span>
+│   ├── <span class="fn">bulletins.py</span>       <span class="c"># /bulletins   PDF individuel / classe</span>
+│   ├── <span class="fn">statistiques.py</span>    <span class="c"># /stats       Graphiques Plotly</span>
+│   ├── <span class="fn">admin.py</span>           <span class="c"># /admin       Utilisateurs + migration</span>
+│   └── <span class="fn">db.py</span>              <span class="c"># /db          Explorateur BDD (admin)</span>
+│
+└── utils/
+    ├── <span class="fn">migration.py</span>       <span class="c"># Import Excel→SQL, 7 feuilles, idempotent</span>
+    ├── <span class="fn">mailer.py</span>          <span class="c"># SMTP notifications planning</span>
+    ├── <span class="fn">pdf_generator.py</span>   <span class="c"># Bulletins ReportLab</span>
+    └── <span class="fn">scoped_db.py</span>       <span class="c"># KPIs filtrés selon rôle</span></pre>
+    </div>
+    <h3 class="sub"><span class="ms material-symbols-rounded">conversion_path</span>Flux d'une requête</h3>
+    <div class="flow">
+      <div class="fs"><div class="fi"><span class="ms material-symbols-rounded">language</span></div><div class="fl">Navigateur</div><div class="fsub">HTTP/S</div></div>
+      <div class="fs"><div class="fi"><span class="ms material-symbols-rounded">dns</span></div><div class="fl">Gunicorn</div><div class="fsub">WSGI</div></div>
+      <div class="fs"><div class="fi"><span class="ms material-symbols-rounded">bolt</span></div><div class="fl">Flask/Dash</div><div class="fsub">Routing + callbacks</div></div>
+      <div class="fs"><div class="fi"><span class="ms material-symbols-rounded">hub</span></div><div class="fl">SQLAlchemy</div><div class="fsub">ORM → SQL</div></div>
+      <div class="fs"><div class="fi"><span class="ms material-symbols-rounded">database</span></div><div class="fl">PostgreSQL</div><div class="fsub">Persistance</div></div>
+      <div class="fs"><div class="fi"><span class="ms material-symbols-rounded">data_object</span></div><div class="fl">JSON → Dash</div><div class="fsub">Re-render UI</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 BDD -->
+<section id="bdd">
+  <div class="w">
+    <div class="stag">03 — Base de données</div>
+    <h2 class="sh">16 tables · 6 groupes</h2>
+    <p class="ss">Modèle relationnel avec contraintes d'intégrité strictes, enums SQL et unicité garantie. SQLite en dev, PostgreSQL en prod — même code ORM.</p>
+    <div class="dbg">
+      <div class="dbc"><div class="dbh"><span class="ms material-symbols-rounded">person</span>users</div><div class="dbfs"><div class="dbf"><span class="pk">PK</span>id</div><div class="dbf">nom · prenom</div><div class="dbf">email (unique)</div><div class="dbf">password_hash</div><div class="dbf">role (enum)</div></div></div>
+      <div class="dbc"><div class="dbh"><span class="ms material-symbols-rounded">school</span>etudiants</div><div class="dbfs"><div class="dbf"><span class="pk">PK</span>id</div><div class="dbf"><span class="fk">FK</span>user_id</div><div class="dbf"><span class="fk">FK</span>classe_id</div><div class="dbf">matricule (unique)</div><div class="dbf">date_naissance</div></div></div>
+      <div class="dbc"><div class="dbh"><span class="ms material-symbols-rounded">domain</span>filieres</div><div class="dbfs"><div class="dbf"><span class="pk">PK</span>id</div><div class="dbf">code (unique)</div><div class="dbf">libelle</div><div class="dbf">duree_ans</div></div></div>
+      <div class="dbc"><div class="dbh"><span class="ms material-symbols-rounded">groups</span>classes</div><div class="dbfs"><div class="dbf"><span class="pk">PK</span>id</div><div class="dbf"><span class="fk">FK</span>filiere_id</div><div class="dbf">nom · niveau</div><div class="dbf">is_commune</div><div class="dbf">annee_scolaire</div></div></div>
+      <div class="dbc"><div class="dbh"><span class="ms material-symbols-rounded">library_books</span>ue</div><div class="dbfs"><div class="dbf"><span class="pk">PK</span>id</div><div class="dbf">code · libelle</div><div class="dbf">coefficient</div><div class="dbf"><span class="fk">FK</span>classe_id</div><div class="dbf"><span class="fk">FK</span>periode_id</div></div></div>
+      <div class="dbc"><div class="dbh"><span class="ms material-symbols-rounded">menu_book</span>modules</div><div class="dbfs"><div class="dbf"><span class="pk">PK</span>id</div><div class="dbf">code · libelle · coef</div><div class="dbf">enseignant</div><div class="dbf">email_enseignant</div><div class="dbf">volume_horaire</div><div class="dbf"><span class="fk">FK</span>ue_id · classe_id</div></div></div>
+      <div class="dbc"><div class="dbh"><span class="ms material-symbols-rounded">calendar_today</span>seances</div><div class="dbfs"><div class="dbf"><span class="pk">PK</span>id</div><div class="dbf"><span class="fk">FK</span>module_id</div><div class="dbf"><span class="fk">FK</span>created_by</div><div class="dbf">date · theme</div><div class="dbf">heure_debut · fin</div></div></div>
+      <div class="dbc"><div class="dbh"><span class="ms material-symbols-rounded">how_to_reg</span>presences</div><div class="dbfs"><div class="dbf"><span class="pk">PK</span>id</div><div class="dbf"><span class="fk">FK</span>seance_id</div><div class="dbf"><span class="fk">FK</span>etudiant_id</div><div class="dbf">present (bool)</div><div class="dbf">UNIQUE(séance,étud)</div></div></div>
+      <div class="dbc"><div class="dbh"><span class="ms material-symbols-rounded">grade</span>notes</div><div class="dbfs"><div class="dbf"><span class="pk">PK</span>id</div><div class="dbf"><span class="fk">FK</span>etudiant_id</div><div class="dbf"><span class="fk">FK</span>module_id</div><div class="dbf">note (float)</div><div class="dbf">numero (1 ou 2)</div><div class="dbf">type_eval (enum)</div></div></div>
+      <div class="dbc"><div class="dbh"><span class="ms material-symbols-rounded">date_range</span>periodes</div><div class="dbfs"><div class="dbf"><span class="pk">PK</span>id</div><div class="dbf"><span class="fk">FK</span>classe_id</div><div class="dbf">libelle</div><div class="dbf">date_debut · fin</div><div class="dbf">est_cloturee</div></div></div>
+      <div class="dbc"><div class="dbh"><span class="ms material-symbols-rounded">event_note</span>plannings</div><div class="dbfs"><div class="dbf"><span class="pk">PK</span>id</div><div class="dbf">semaine (date)</div><div class="dbf">statut (enum)</div><div class="dbf">commentaire</div><div class="dbf"><span class="fk">FK</span>created_by</div></div></div>
+      <div class="dbc"><div class="dbh"><span class="ms material-symbols-rounded">link</span>planning_classes</div><div class="dbfs"><div class="dbf"><span class="pk">PK</span>id</div><div class="dbf"><span class="fk">FK</span>planning_id</div><div class="dbf"><span class="fk">FK</span>classe_id</div><div class="dbf">UNIQUE</div></div></div>
+      <div class="dbc"><div class="dbh"><span class="ms material-symbols-rounded">schedule</span>planning_seances</div><div class="dbfs"><div class="dbf"><span class="pk">PK</span>id</div><div class="dbf"><span class="fk">FK</span>planning_id</div><div class="dbf"><span class="fk">FK</span>module_id</div><div class="dbf">date · heure_debut</div><div class="dbf">heure_fin</div></div></div>
+      <div class="dbc"><div class="dbh"><span class="ms material-symbols-rounded">supervisor_account</span>resp_filieres</div><div class="dbfs"><div class="dbf"><span class="pk">PK</span>id</div><div class="dbf"><span class="fk">FK</span>user_id</div><div class="dbf"><span class="fk">FK</span>filiere_id</div></div></div>
+      <div class="dbc"><div class="dbh"><span class="ms material-symbols-rounded">badge</span>resp_classes</div><div class="dbfs"><div class="dbf"><span class="pk">PK</span>id</div><div class="dbf"><span class="fk">FK</span>user_id</div><div class="dbf"><span class="fk">FK</span>classe_id</div><div class="dbf">est_titulaire</div></div></div>
+      <div class="dbc"><div class="dbh"><span class="ms material-symbols-rounded">history</span>migration_logs</div><div class="dbfs"><div class="dbf"><span class="pk">PK</span>id</div><div class="dbf">fichier · date</div><div class="dbf">statut (enum)</div><div class="dbf">details (text)</div></div></div>
+    </div>
+    <h3 class="sub"><span class="ms material-symbols-rounded">category</span>Enums clés</h3>
+    <div class="g g2">
+      <div class="card"><h4>RoleEnum</h4><p style="margin-top:8px"><span class="tag tb">admin</span> <span class="tag tb">resp_filiere</span> <span class="tag tb">resp_classe</span> <span class="tag tb">eleve</span></p></div>
+      <div class="card"><h4>StatutPlanningEnum</h4><p style="margin-top:8px"><span class="tag">brouillon</span> <span class="tag tb">soumis</span> <span class="tag to">modifie</span> <span class="tag tg">valide</span> <span class="tag tr">rejete</span></p></div>
+    </div>
+    <h3 class="sub"><span class="ms material-symbols-rounded">terminal</span>Scripts BDD</h3>
+    <div class="cb"><div class="ch"><div class="cd" style="background:#ff5f57"></div><div class="cd" style="background:#febc2e"></div><div class="cd" style="background:#28c840"></div><span class="ct">bash</span></div>
+    <pre><span class="c"># Recréer toute la BDD + seed (⚠ supprime les données)</span>
+python recreate_db.py
+
+<span class="c"># Nettoyer les doublons filières / classes</span>
+python fix_doublons.py
+
+<span class="c"># Tester la connexion à la base</span>
+python -c <span class="str">"from database import test_connexion; test_connexion()"</span></pre></div>
+    <div class="call cw"><span class="ms material-symbols-rounded">warning</span><div><strong>Attention :</strong> <code>recreate_db.py</code> supprime toutes les données. Réserver à l'initialisation ou aux remises à zéro complètes.</div></div>
+  </div>
+</section>
+
+<!-- 04 MODULES -->
+<section id="modules">
+  <div class="w">
+    <div class="stag">04 — Modules applicatifs</div>
+    <h2 class="sh">10 pages, 1 mission chacune</h2>
+    <p class="ss">Chaque fichier dans <code>pages/</code> est une route Dash indépendante avec ses callbacks, sa logique métier et son contrôle d'accès.</p>
+    <div class="g g2">
+      <div class="card fade d1"><div class="ci"><span class="ms material-symbols-rounded">login</span></div><h4>login.py — <code>/</code></h4><p>Layout split. Vérifie email + bcrypt, crée la session <code>dcc.Store</code> avec <code>user_id</code>, <code>role</code>, <code>nom</code>, <code>prenom</code>. Redirect vers <code>/dashboard</code>.</p></div>
+      <div class="card fade d2"><div class="ci or"><span class="ms material-symbols-rounded">dashboard</span></div><h4>dashboard.py — <code>/dashboard</code></h4><p>KPIs dynamiques selon le rôle. Admin → stats globales. Resp. filière → sa filière. Délégué → sa classe. Étudiant → ses indicateurs personnels.</p></div>
+      <div class="card fade d3"><div class="ci gr"><span class="ms material-symbols-rounded">menu_book</span></div><h4>cours.py — <code>/cours</code></h4><p>CRUD UE et Modules via modals. Barre de progression en temps réel (heures effectuées / volume horaire prévu). Champ email enseignant pour notifications planning.</p></div>
+      <div class="card fade d4"><div class="ci"><span class="ms material-symbols-rounded">calendar_today</span></div><h4>seances.py — <code>/seances</code></h4><p>Création séance avec module, date, créneau, thème. <strong>Appel numérique</strong> : checklist générée dynamiquement — coché = absent. Historique filtrable.</p></div>
+      <div class="card fade d1"><div class="ci or"><span class="ms material-symbols-rounded">people</span></div><h4>etudiants.py — <code>/etudiants</code></h4><p>Liste + recherche. Fiche : assiduité, moyenne générale, absences détaillées. <strong>Workflow notes</strong> : template → saisie → upload → moyennes auto.</p></div>
+      <div class="card fade d2"><div class="ci gr"><span class="ms material-symbols-rounded">picture_as_pdf</span></div><h4>bulletins.py — <code>/bulletins</code></h4><p>PDF individuel ou lot classe. Notes, coefficients, moyenne pondérée, rang, appréciations. Charte ENSAE via ReportLab.</p></div>
+      <div class="card fade d3"><div class="ci"><span class="ms material-symbols-rounded">event_note</span></div><h4>planning.py — <code>/planning</code></h4><p>Calendrier interactif. Workflow : Délégué soumet → email → Resp. filière valide/rejette → email retour.</p></div>
+      <div class="card fade d4"><div class="ci cy"><span class="ms material-symbols-rounded">bar_chart</span></div><h4>statistiques.py — <code>/statistiques</code></h4><p>Graphiques Plotly : distribution notes, assiduité par classe, progression horaire. Scope auto selon rôle, filtre classe.</p></div>
+      <div class="card fade d1"><div class="ci ro"><span class="ms material-symbols-rounded">manage_accounts</span></div><h4>admin.py — <code>/admin</code></h4><p>CRUD utilisateurs et rôles. Import Excel 7 feuilles avec rapport détaillé. Gestion filières/classes. Désignation délégués.</p></div>
+      <div class="card fade d2"><div class="ci"><span class="ms material-symbols-rounded">database</span></div><h4>db.py — <code>/db</code> <span class="tag tr">Admin only</span></h4><p>16 tables avec compteurs temps réel. Tableau paginé, recherche textuelle, édition inline via modal, suppression avec confirmation.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 RÔLES -->
+<section id="roles">
+  <div class="w">
+    <div class="stag">05 — Rôles & Accès</div>
+    <h2 class="sh">Contrôle d'accès granulaire</h2>
+    <p class="ss">4 rôles avec périmètres fonctionnels stricts. Double vérification : au chargement de page (redirect) et au niveau des requêtes SQL (scope automatique).</p>
+    <div class="rg">
+      <div class="rc">
+        <div class="rt"><div class="ra" style="background:#eff6ff"><span class="ms material-symbols-rounded" style="color:#1d4ed8;font-size:20px">shield</span></div><div><div class="rn">admin</div><div class="rb">Accès complet</div></div></div>
+        <div class="rbody">
+          <div class="ri ok"><span class="ms material-symbols-rounded">check</span>Tous les modules</div>
+          <div class="ri ok"><span class="ms material-symbols-rounded">check</span>Gestion utilisateurs</div>
+          <div class="ri ok"><span class="ms material-symbols-rounded">check</span>Explorateur BDD</div>
+          <div class="ri ok"><span class="ms material-symbols-rounded">check</span>Migration Excel</div>
+          <div class="ri ok"><span class="ms material-symbols-rounded">check</span>Toutes filières</div>
+        </div>
+      </div>
+      <div class="rc">
+        <div class="rt"><div class="ra" style="background:#ecfdf5"><span class="ms material-symbols-rounded" style="color:#047857;font-size:20px">supervisor_account</span></div><div><div class="rn">resp_filiere</div><div class="rb">Pédagogique</div></div></div>
+        <div class="rbody">
+          <div class="ri ok"><span class="ms material-symbols-rounded">check</span>Cours & modules</div>
+          <div class="ri ok"><span class="ms material-symbols-rounded">check</span>Séances (filière)</div>
+          <div class="ri ok"><span class="ms material-symbols-rounded">check</span>Notes + bulletins</div>
+          <div class="ri ok"><span class="ms material-symbols-rounded">check</span>Valide plannings</div>
+          <div class="ri ok"><span class="ms material-symbols-rounded">check</span>Statistiques</div>
+        </div>
+      </div>
+      <div class="rc">
+        <div class="rt"><div class="ra" style="background:#f5f3ff"><span class="ms material-symbols-rounded" style="color:#6d28d9;font-size:20px">badge</span></div><div><div class="rn">resp_classe</div><div class="rb">Délégué</div></div></div>
+        <div class="rbody">
+          <div class="ri ok"><span class="ms material-symbols-rounded">check</span>Séances (sa classe)</div>
+          <div class="ri ok"><span class="ms material-symbols-rounded">check</span>Appel numérique</div>
+          <div class="ri ok"><span class="ms material-symbols-rounded">check</span>Crée plannings</div>
+          <div class="ri ok"><span class="ms material-symbols-rounded">check</span>Bulletins classe</div>
+          <div class="ri no"><span class="ms material-symbols-rounded">close</span>Pas de stats</div>
+        </div>
+      </div>
+      <div class="rc">
+        <div class="rt"><div class="ra" style="background:#e0f2fe"><span class="ms material-symbols-rounded" style="color:#0369a1;font-size:20px">school</span></div><div><div class="rn">eleve</div><div class="rb">Lecture seule</div></div></div>
+        <div class="rbody">
+          <div class="ri ok"><span class="ms material-symbols-rounded">check</span>Son bulletin</div>
+          <div class="ri ok"><span class="ms material-symbols-rounded">check</span>Son planning</div>
+          <div class="ri ok"><span class="ms material-symbols-rounded">check</span>Ses notes</div>
+          <div class="ri no"><span class="ms material-symbols-rounded">close</span>Pas de CRUD</div>
+          <div class="ri no"><span class="ms material-symbols-rounded">close</span>Pas d'admin</div>
+        </div>
+      </div>
+    </div>
+    <h3 class="sub"><span class="ms material-symbols-rounded">table_chart</span>Matrice d'accès</h3>
+    <div class="tw"><table>
+      <thead><tr><th>Page</th><th>admin</th><th>resp_filiere</th><th>resp_classe</th><th>eleve</th></tr></thead>
+      <tbody>
+        <tr><td>/dashboard</td><td><span class="tag tg">Global</span></td><td><span class="tag tg">Filière</span></td><td><span class="tag tg">Classe</span></td><td><span class="tag tg">Personnel</span></td></tr>
+        <tr><td>/cours</td><td><span class="tag tg">✓</span></td><td><span class="tag tg">✓</span></td><td><span class="tag to">Lecture</span></td><td><span class="tag tr">✗</span></td></tr>
+        <tr><td>/seances</td><td><span class="tag tg">✓</span></td><td><span class="tag tg">✓</span></td><td><span class="tag tg">Sa classe</span></td><td><span class="tag tr">✗</span></td></tr>
+        <tr><td>/etudiants</td><td><span class="tag tg">✓</span></td><td><span class="tag tg">✓</span></td><td><span class="tag tg">Sa classe</span></td><td><span class="tag tb">Fiche perso</span></td></tr>
+        <tr><td>/planning</td><td><span class="tag tg">✓</span></td><td><span class="tag tb">Validation</span></td><td><span class="tag tb">Création</span></td><td><span class="tag to">Lecture</span></td></tr>
+        <tr><td>/bulletins</td><td><span class="tag tg">✓</span></td><td><span class="tag tg">✓</span></td><td><span class="tag tg">Sa classe</span></td><td><span class="tag tb">Le sien</span></td></tr>
+        <tr><td>/statistiques</td><td><span class="tag tg">✓</span></td><td><span class="tag tg">✓</span></td><td><span class="tag tr">✗</span></td><td><span class="tag tr">✗</span></td></tr>
+        <tr><td>/admin</td><td><span class="tag tg">✓</span></td><td><span class="tag tr">✗</span></td><td><span class="tag tr">✗</span></td><td><span class="tag tr">✗</span></td></tr>
+        <tr><td>/db</td><td><span class="tag tg">✓</span></td><td><span class="tag tr">✗</span></td><td><span class="tag tr">✗</span></td><td><span class="tag tr">✗</span></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- 06 PIPELINE -->
+<section id="pipeline">
+  <div class="w">
+    <div class="stag">06 — Pipeline de données</div>
+    <h2 class="sh">Migration Excel → SQL</h2>
+    <p class="ss">Import idempotent multi-feuilles. Les entités déjà présentes sont ignorées sans créer de doublons. Rapport détaillé à chaque import.</p>
+    <div class="flow">
+      <div class="fs"><div class="fi"><span class="ms material-symbols-rounded">download</span></div><div class="fl">Générer template</div><div class="fsub"><code>--template</code></div></div>
+      <div class="fs"><div class="fi"><span class="ms material-symbols-rounded">edit_note</span></div><div class="fl">Remplir Excel</div><div class="fsub">7 feuilles</div></div>
+      <div class="fs"><div class="fi"><span class="ms material-symbols-rounded">upload_file</span></div><div class="fl">Upload UI</div><div class="fsub">Drag & Drop</div></div>
+      <div class="fs"><div class="fi"><span class="ms material-symbols-rounded">verified</span></div><div class="fl">Validation</div><div class="fsub">Anti-doublons</div></div>
+      <div class="fs"><div class="fi"><span class="ms material-symbols-rounded">fact_check</span></div><div class="fl">Rapport</div><div class="fsub">✅ / ⚠️ / ❌</div></div>
+      <div class="fs"><div class="fi"><span class="ms material-symbols-rounded">history</span></div><div class="fl">Log persistant</div><div class="fsub">migration_logs</div></div>
+    </div>
+    <h3 class="sub"><span class="ms material-symbols-rounded">table_view</span>7 feuilles dans l'ordre</h3>
+    <div class="tw"><table>
+      <thead><tr><th>#</th><th>Feuille</th><th>Colonnes requises</th><th>Dépend de</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Filieres</td><td>Code, Libelle, Duree_ans</td><td>—</td></tr>
+        <tr><td>2</td><td>Classes</td><td>Nom, Code_Filiere, Niveau, Is_Commune, Annee_Scolaire</td><td>Filieres</td></tr>
+        <tr><td>3</td><td>Etudiants</td><td>Matricule, Nom, Prenom, Email, Date_Naissance, Nom_Classe</td><td>Classes</td></tr>
+        <tr><td>4</td><td>Resp_Filieres</td><td>Nom, Prenom, Email, Mot_de_passe, Code_Filiere</td><td>Filieres</td></tr>
+        <tr><td>5</td><td>Resp_Classes</td><td>Nom, Prenom, Email, Mot_de_passe, Nom_Classe, Type</td><td>Classes</td></tr>
+        <tr><td>6</td><td>Delegues</td><td>Nom_Classe, Matricule_Titulaire, Matricule_Suppleant</td><td>Etudiants</td></tr>
+      </tbody>
+    </table></div>
+    <h3 class="sub"><span class="ms material-symbols-rounded">grade</span>Pipeline des notes</h3>
+    <div class="flow">
+      <div class="fs"><div class="fi"><span class="ms material-symbols-rounded">download</span></div><div class="fl">Template Excel</div><div class="fsub">Modules pré-remplis</div></div>
+      <div class="fs"><div class="fi"><span class="ms material-symbols-rounded">edit</span></div><div class="fl">Saisie notes</div><div class="fsub">Note1 + Note2</div></div>
+      <div class="fs"><div class="fi"><span class="ms material-symbols-rounded">upload</span></div><div class="fl">Upload</div><div class="fsub">Page étudiants</div></div>
+      <div class="fs"><div class="fi"><span class="ms material-symbols-rounded">calculate</span></div><div class="fl">Calcul auto</div><div class="fsub">Moyennes + rangs</div></div>
+      <div class="fs"><div class="fi"><span class="ms material-symbols-rounded">picture_as_pdf</span></div><div class="fl">PDF disponible</div><div class="fsub">Bulletins générables</div></div>
+    </div>
+    <h3 class="sub"><span class="ms material-symbols-rounded">mail</span>Notifications email automatiques</h3>
+    <div class="tw"><table>
+      <thead><tr><th>Déclencheur</th><th>Destinataire</th><th>Contenu</th></tr></thead>
+      <tbody>
+        <tr><td>Planning soumis par délégué</td><td>Resp. filière</td><td>Séances proposées + demande de validation</td></tr>
+        <tr><td>Planning validé</td><td>Délégué + enseignants</td><td>Confirmation du programme définitif</td></tr>
+        <tr><td>Planning rejeté / à modifier</td><td>Délégué</td><td>Commentaire motivé du responsable</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- 07 DÉPLOIEMENT -->
+<section id="deploy">
+  <div class="w">
+    <div class="stag">07 — Déploiement</div>
+    <h2 class="sh">De GitHub à la prod</h2>
+    <p class="ss">Déploiement continu sur Render.com depuis la branche <code>main</code>. PostgreSQL managé, HTTPS automatique, variables d'environnement pour les secrets.</p>
+    <h3 class="sub"><span class="ms material-symbols-rounded">computer</span>Installation locale</h3>
+    <div class="cb"><div class="ch"><div class="cd" style="background:#ff5f57"></div><div class="cd" style="background:#febc2e"></div><div class="cd" style="background:#28c840"></div><span class="ct">bash — setup local</span></div>
+    <pre><span class="c"># 1. Cloner</span>
+git clone https://github.com/papamagattediop/SGA_ENSAE && cd SGA_ENSAE
+
+<span class="c"># 2. Environnement virtuel</span>
+python -m venv .venv && source .venv/bin/activate
+
+<span class="c"># 3. Dépendances</span>
+pip install -r requirements.txt
+
+<span class="c"># 4. Configurer les secrets</span>
+cp .env.example .env   <span class="c"># puis éditer MAIL_ADDRESS, MAIL_PASSWORD, DATABASE_URL</span>
+
+<span class="c"># 5. Initialiser la BDD</span>
+python recreate_db.py
+
+<span class="c"># 6. Lancer → http://127.0.0.1:8050</span>
+python app.py</pre></div>
+    <h3 class="sub"><span class="ms material-symbols-rounded">cloud</span>Configuration Render.com</h3>
+    <div class="g g3">
+      <div class="card"><div class="ci"><span class="ms material-symbols-rounded">settings</span></div><h4>Build & Start</h4><p>Build : <code>pip install -r requirements.txt</code><br/><br/>Start : <code>gunicorn app:server</code></p></div>
+      <div class="card"><div class="ci or"><span class="ms material-symbols-rounded">lock</span></div><h4>Variables d'env.</h4><p><code>DATABASE_URL</code> → PostgreSQL<br/><code>MAIL_ADDRESS</code> → Gmail<br/><code>MAIL_PASSWORD</code> → App PW<br/><code>PYTHON_VERSION</code> → 3.11.9</p></div>
+      <div class="card"><div class="ci gr"><span class="ms material-symbols-rounded">file_present</span></div><h4>Fichiers requis</h4><p><code>runtime.txt</code> → <code>python-3.11.9</code><br/><code>requirements.txt</code> avec <code>gunicorn</code><br/><code>app.py</code> → <code>server = app.server</code></p></div>
+    </div>
+    <div class="call cw"><span class="ms material-symbols-rounded">warning</span><div><strong>Erreur fréquente :</strong> la commande Gunicorn doit être <code>gunicorn app:server</code> — jamais <code>app:app</code>. L'objet Dash n'est pas callable WSGI, seul <code>app.server</code> (Flask sous-jacent) l'est.</div></div>
+    <h3 class="sub"><span class="ms material-symbols-rounded">conversion_path</span>Pipeline CI/CD</h3>
+    <div class="cb"><div class="ch"><div class="cd" style="background:#ff5f57"></div><div class="cd" style="background:#febc2e"></div><div class="cd" style="background:#28c840"></div><span class="ct">pipeline</span></div>
+    <pre>git push origin main
+  ↓ webhook Render
+Build : pip install -r requirements.txt
+  ↓
+Deploy : gunicorn app:server --bind 0.0.0.0:$PORT
+  ↓
+PostgreSQL Render Managed DB (via DATABASE_URL)
+  ↓
+https://sga-ensae.onrender.com  <span class="c"># HTTPS auto Let's Encrypt</span></pre></div>
+    <div class="call cok"><span class="ms material-symbols-rounded">check_circle</span><div><strong>Application en ligne.</strong> Compte admin → <code>admin@ensae.sn</code> / <code>admin123</code> — changer le mot de passe dès la première connexion.</div></div>
+  </div>
+</section>
+
+<!-- 08 TESTS -->
+<section id="tests">
+  <div class="w">
+    <div class="stag">08 — Guide de test</div>
+    <h2 class="sh">10 scénarios à valider</h2>
+    <p class="ss">Parcours complet dans l'ordre — certaines étapes créent les données nécessaires aux suivantes.</p>
+    <div class="tl">
+      <div class="tc"><div class="thead"><div class="tn">1</div><div class="ttitle">Authentification & Session</div><span class="tag tb">Prérequis</span></div><div class="tbody2"><ul>
+        <li class="chk">Se connecter <code>admin@ensae.sn / admin123</code> → redirection <code>/dashboard</code></li>
+        <li class="chk">Navbar affiche tous les menus admin</li>
+        <li>Tester email incorrect → message d'erreur affiché</li>
+        <li class="chk">Déconnexion via menu avatar → retour à <code>/</code></li>
+      </ul></div></div>
+
+      <div class="tc"><div class="thead"><div class="tn">2</div><div class="ttitle">Migration Excel → SQL</div><span class="tag to">Admin</span></div><div class="tbody2"><ul>
+        <li>Générer le template : <code>python utils/migration.py --template</code></li>
+        <li>Remplir feuilles Filieres, Classes, Etudiants</li>
+        <li class="chk">Upload drag & drop → rapport s'affiche (✅ importés / ⚠️ ignorés / ❌ erreurs)</li>
+        <li class="chk">Ré-upload même fichier → aucun doublon, avertissements uniquement</li>
+        <li class="chk">Log visible dans Historique des imports</li>
+      </ul></div></div>
+
+      <div class="tc"><div class="thead"><div class="tn">3</div><div class="ttitle">Gestion Cours & UE</div><span class="tag tb">Admin / Resp. filière</span></div><div class="tbody2"><ul>
+        <li>Créer UE <code>UE-STAT</code>, sélectionner classe et période</li>
+        <li>Créer Module rattaché : 30h, coef 2, email enseignant</li>
+        <li class="chk">Barre de progression affiche 0% (aucune séance encore)</li>
+        <li class="chk">Modifier le module → changements persistés après rechargement</li>
+      </ul></div></div>
+
+      <div class="tc"><div class="thead"><div class="tn">4</div><div class="ttitle">Séances & Appel numérique</div><span class="tag tb">Multi-rôles</span></div><div class="tbody2"><ul>
+        <li>Créer séance : module, date, 08h–10h, thème "Introduction"</li>
+        <li class="chk">Checklist de tous les étudiants de la classe générée automatiquement</li>
+        <li>Cocher 2 étudiants absents → valider</li>
+        <li class="chk">Historique affiche la séance · barre progression Cours +2h/30h</li>
+        <li class="chk">Taux d'assiduité des absents diminue dans leurs fiches</li>
+      </ul></div></div>
+
+      <div class="tc"><div class="thead"><div class="tn">5</div><div class="ttitle">Workflow Notes</div><span class="tag tb">Admin / Resp. filière</span></div><div class="tbody2"><ul>
+        <li>Télécharger template notes pour une classe (Excel avec colonnes Note1 / Note2)</li>
+        <li>Remplir les notes de 5 étudiants sur 2 modules</li>
+        <li class="chk">Upload → moyennes calculées automatiquement, visibles dans les fiches</li>
+        <li class="chk">Moyenne générale et rang mis à jour dans la classe</li>
+      </ul></div></div>
+
+      <div class="tc"><div class="thead"><div class="tn">6</div><div class="ttitle">Bulletins PDF</div><span class="tag tb">Multi-rôles</span></div><div class="tbody2"><ul>
+        <li>Générer bulletin individuel pour un étudiant avec notes</li>
+        <li class="chk">PDF contient : nom, classe, tableau notes, coefficients, moyenne, rang</li>
+        <li>Générer en lot pour toute une classe</li>
+        <li class="chk">PDF multi-pages, un bulletin par étudiant, charte ENSAE</li>
+      </ul></div></div>
+
+      <div class="tc"><div class="thead"><div class="tn">7</div><div class="ttitle">Workflow Planning collaboratif</div><span class="tag to">Multi-rôles requis</span></div><div class="tbody2"><ul>
+        <li>Se connecter en <strong>resp_classe</strong> → créer planning semaine suivante avec 3 séances</li>
+        <li>Soumettre → statut passe à <span class="tag tb">soumis</span></li>
+        <li>Reconnecter en <strong>resp_filiere</strong> → planning visible</li>
+        <li class="chk">Valider → statut <span class="tag tg">validé</span>, email envoyé au délégué</li>
+        <li class="chk">Rejeter avec commentaire → commentaire obligatoire validé</li>
+      </ul></div></div>
+
+      <div class="tc"><div class="thead"><div class="tn">8</div><div class="ttitle">Statistiques interactives</div><span class="tag tb">Admin / Resp. filière</span></div><div class="tbody2"><ul>
+        <li class="chk">Graphiques Plotly affichés : distribution notes, assiduité, progression</li>
+        <li class="chk">Filtre par classe → mise à jour dynamique</li>
+        <li>Se connecter en resp_filiere → scope limité à sa filière</li>
+      </ul></div></div>
+
+      <div class="tc"><div class="thead"><div class="tn">9</div><div class="ttitle">Explorateur BDD</div><span class="tag tr">Admin uniquement</span></div><div class="tbody2"><ul>
+        <li class="chk">16 tables listées avec compteurs temps réel</li>
+        <li class="chk">Tableau paginé avec recherche textuelle fonctionnelle</li>
+        <li class="chk">Modifier un champ → persistance confirmée après rechargement</li>
+      </ul></div></div>
+
+      <div class="tc"><div class="thead"><div class="tn">10</div><div class="ttitle">Sécurité & Contrôle d'accès</div><span class="tag tr">Critique</span></div><div class="tbody2"><ul>
+        <li>Se connecter en étudiant → tenter <code>/admin</code> manuellement</li>
+        <li class="chk">Redirection vers login — accès refusé</li>
+        <li class="chk">Même résultat pour <code>/db</code> et <code>/statistiques</code></li>
+        <li>Se déconnecter → tenter <code>/dashboard</code> sans session</li>
+        <li class="chk">Redirection login — session expirée détectée</li>
+      </ul></div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="fi2">
+    <div><div class="flogo">SGA ENSAE</div><div class="fmeta" style="margin-top:5px">École Nationale de la Statistique et de l'Analyse Économique · Dakar, Sénégal</div></div>
+    <div class="fmeta">Python 3.11 · Dash 2.17 · SQLAlchemy 2.0 · PostgreSQL · Render.com · 2024–2025</div>
+  </div>
+</footer>
+
+<script>
+const secs=document.querySelectorAll('section[id]'),lks=document.querySelectorAll('.nav-links a');
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){lks.forEach(a=>a.classList.remove('on'));const a=document.querySelector(`.nav-links a[href="#${e.target.id}"]`);if(a)a.classList.add('on')}})},{threshold:.25,rootMargin:'-58px 0px 0px 0px'});
+secs.forEach(s=>obs.observe(s));
+</script>
+</body>
+</html>
